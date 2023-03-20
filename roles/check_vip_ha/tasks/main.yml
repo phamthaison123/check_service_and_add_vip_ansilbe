@@ -1,27 +1,27 @@
 ---
 
   
-- name: Copy check_haproxy_and_add_vip.sh.j2
+- name: Copy check_service_name_and_add_vip.sh.j2
   become: true
   template:
-    src: files/check_haproxy_and_add_vip.sh.j2
-    dest: /opt/check_haproxy_and_add_vip.sh
+    src: files/check_service_name_and_add_vip.sh.j2
+    dest: /opt/check_service_name_and_add_vip.sh
     mode: 0755
 
-- name: Copy check_haproxy_and_add_vip.service.j2
+- name: Copy check_service_name_and_add_vip.sh.service.j2
   become: true
   template:
-    src: files/check_haproxy_and_add_vip.service.j2
-    dest: /etc/systemd/system/check_haproxy_and_add_vip.service
+    src: files/check_service_name_and_add_vip.sh.service.j2
+    dest: /etc/systemd/system/check_service_name_and_add_vip.sh.service
     mode: 0644
 
 - name: Reload systemd daemon
   systemd:
     daemon_reload: true
 
-- name: Start and enable check_haproxy_and_add_vip.service service
+- name: Start and enable check_service_name_and_add_vip.sh.service service
   systemd:
-    name: check_haproxy_and_add_vip.service
+    name: check_service_name_and_add_vip.sh.service
     state: started
     enabled: yes
   
