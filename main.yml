@@ -4,4 +4,4 @@
   become: true
 
   roles:
-    - check_vip_ha
+    - check_service
