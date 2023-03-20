@@ -1,0 +1,12 @@
+[Unit]
+Description=Check HAProxy and add VIP script
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/check_haproxy_and_add_vip.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

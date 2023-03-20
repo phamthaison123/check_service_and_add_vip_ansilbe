@@ -1,0 +1,4 @@
+# IP addresses IPv4
+ipaddr: 192.168.2.3/23
+# network interface
+interface: lo
