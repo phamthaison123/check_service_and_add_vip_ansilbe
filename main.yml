@@ -1,5 +1,5 @@
 ---
-- name: Configure check_haproxy_and_add_vip.sh and systemd
+- name: Configure check_service_and_add_vip.sh and systemd
   hosts: all
   become: true
 
