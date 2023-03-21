@@ -1,6 +1,0 @@
-# Service check
-service_name: apache2
-# IP addresses IPv4
-vip_address: 192.168.2.3/23
-# network interface
-interface: lo

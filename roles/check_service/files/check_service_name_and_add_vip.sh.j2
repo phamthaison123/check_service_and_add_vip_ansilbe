@@ -1,20 +1,23 @@
 #!/bin/bash
+SERVICE="$SERVICE"
+INTERFACE="$INTERFACE"
+VIP_ADDRESS="$VIP_ADDRESS"
 while true; do
     # Check if the service is running
-    if systemctl is-active haproxy.service >/dev/null 2>&1; then
-        # Check if the interface has the specified IP address
-        if ip -br addr show dev {{ interface }} | grep -q {{ vip_address }}; then
-            echo "Service is running and interface {{ interface }} has IP address {{ vip_address }}"
+    if systemctl is-active $SERVICE.service >/dev/null 2>&1; then
+        # Check if the $INTERFACE has the specified IP address
+        if ip -br addr show dev $INTERFACE | grep -q $VIP_ADDRESS ; then
+            echo "$SERVICE is running and interface $INTERFACE has IP address $VIP_ADDRESS"
             sleep 2
         else
-            echo "Interface {{ interface }} does not have IP address {{ vip_address }}, adding it now"
-            ip addr add {{ vip_address }} dev {{ interface }}
+            echo "Interface $INTERFACE does not have IP address $VIP_ADDRESS, adding it now"
+            ip addr add $VIP_ADDRESS dev $INTERFACE
         fi
     else
         # Service is not running, remove the IP address if it exists
-        if ip -br addr show dev {{ interface }} | grep -q {{ vip_address }}; then
-            echo "Haproxy service is not running and interface {{ interface }} has IP address {{ vip_address }}, removing it now"
-            ip addr del {{ vip_address }} dev {{ interface }}
+        if ip -br addr show dev $INTERFACE | grep -q $VIP_ADDRESS; then
+            echo "$SERVICE is not running and interface $INTERFACE has IP address $VIP_ADDRESS, removing it now"
+            ip addr del $VIP_ADDRESS dev $INTERFACE
         fi
     fi
 done

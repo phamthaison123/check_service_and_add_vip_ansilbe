@@ -4,7 +4,10 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/opt/check_service_name_and_add_vip.sh --{{ service_name }} --{{ interface }}  --{{ vip_address }}
+ExecStart=/bin/bash /opt/check_service_name_and_add_vip.sh
+Environment="SERVICE=haproxy"
+Environment="INTERFACE=lo"
+Environment="VIP_ADDRESS=192.168.8.32/24"
 Restart=always
 RestartSec=10
 
